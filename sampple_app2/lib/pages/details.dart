@@ -55,21 +55,26 @@ class _DetailsScreenState extends State<DetailsScreen> {
             itemCount: _shoppingListItems.length,
             itemBuilder: (context, index) {
               final item = _shoppingListItems[index];
-              return ListTile(
+              return Card(
+                elevation: 4.0, // Add elevation to the Card
                 shape: RoundedRectangleBorder(
-                  side: BorderSide(width: 1.0, color: Colors.grey.shade300),
+                side: BorderSide(width: 1.0, color: Colors.grey.shade300),
+                borderRadius: BorderRadius.circular(8.0),
                 ),
-                leading: IconButton(
-                  icon: Icon(Icons.bookmark_added_rounded, color: Colors.deepPurple.shade300),
-                  onPressed: () {},
-                ),
-                title: Text(item['productName']),
-                subtitle: Text(item['productDescription']),
-                trailing: IconButton(
-                  icon: Icon(Icons.delete, color: Colors.grey),
-                  onPressed: () {
-                    _deleteShoppingListItem(item['id']);
-                  },
+                child: ListTile(
+                  leading: IconButton(
+                    icon: Icon(Icons.bookmark_added_rounded, color: Colors.deepPurple.shade300),
+                    onPressed: () {},
+                  ),
+                  
+                  title: Text(item['productName']),
+                  subtitle: Text(item['productDescription']),
+                  trailing: IconButton(
+                    icon: Icon(Icons.delete, color: Colors.grey),
+                    onPressed: () {
+                      _deleteShoppingListItem(item['id']);
+                    },
+                  ),
                 ),
               );
             },

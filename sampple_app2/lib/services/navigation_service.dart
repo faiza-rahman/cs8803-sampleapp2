@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:sampple_app2/pages/form.dart';
 import 'package:sampple_app2/pages/homescreen.dart';
 import 'package:sampple_app2/pages/login_page.dart';
+import 'package:sampple_app2/pages/messages.dart';
 import 'package:sampple_app2/pages/register_page.dart';
 
 class NavigationService {
@@ -11,6 +11,7 @@ class NavigationService {
     "/login": (context) => const LoginPage(),
     "/register": (context) => const RegisterPage(),
     "/home": (context) => const HomeScreen(),
+    "/messages": (context) => const MessagesScreen(),
   };
 
   GlobalKey<NavigatorState> get navigatorKey => _navigatorKey;

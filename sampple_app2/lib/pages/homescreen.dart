@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:sampple_app2/pages/details.dart';
 import 'package:sampple_app2/pages/form.dart';
+import 'package:sampple_app2/pages/messages.dart';
 import 'package:sampple_app2/services/auth_service.dart';
 import 'package:sampple_app2/services/navigation_service.dart';
 
@@ -22,6 +23,7 @@ class _HomeScreenState extends State<HomeScreen> {
   static const List<Widget> _widgetOptions = <Widget>[
     DetailsScreen(),
     MyForm(),
+    MessagesScreen(),
   ];
 
   @override
@@ -67,6 +69,10 @@ class _HomeScreenState extends State<HomeScreen> {
           BottomNavigationBarItem(
             icon: Icon(Icons.add),
             label: 'Add',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.message),
+            label: 'Messages',
           ),
         ],
         currentIndex: _selectedIndex,

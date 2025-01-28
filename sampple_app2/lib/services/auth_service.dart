@@ -13,6 +13,8 @@ class AuthService {
     return _user?.uid;
   }
 
+  String? get userEmail => _user?.email;
+  
   AuthService() {
     _firebaseAuth.authStateChanges().listen(authStateChangesStreamListener);
   }

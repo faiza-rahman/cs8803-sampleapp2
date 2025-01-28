@@ -76,16 +76,22 @@ class _MyFormState extends State<MyForm> {
           "productName": _productController.text,
           "productDescription": _productDesController.text
         });
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) {
-            return DetailsScreen();
-          }),
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Row(
+              children: const [
+                Icon(Icons.check, color: Colors.white),
+                SizedBox(width: 8.0),
+                Text('Item added to shopping list!'),
+              ],
+            ),
+            backgroundColor: Colors.deepPurple.shade300, // Change the color of the Snackbar
+          ),
         );
       },
       child: Text(
         "Add Item".toUpperCase(),
-        style: const TextStyle(
+        style: TextStyle(
             fontWeight: FontWeight.bold, color: Colors.deepPurple),
       ),
     );
