@@ -15,8 +15,9 @@ class _LoginPageState extends State<LoginPage> {
 
   final GlobalKey<FormState> _loginFormKey = GlobalKey();
   final RegExp _emailRegExp = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
-  final bool obscureText = true;
+  bool obscureText = true;
   String? email, password;
+  String? errorMessage;
 
   late AuthService _authService;
   late NavigationService _navigationService;
@@ -66,14 +67,24 @@ class _LoginPageState extends State<LoginPage> {
               TextFormField(
                 obscureText: obscureText,
                 validator: (value) {
-                  if (value != null && value.length >= 6) {
+                  if (value != null) {
                     return null;
                   }
                   return 'Enter a valid password';
                 },
-                decoration: const InputDecoration(
+                decoration: InputDecoration(
                   hintText: 'Password',
-                  border: OutlineInputBorder(),
+                  border: const OutlineInputBorder(),
+                  suffixIcon: IconButton(
+                    icon: Icon(
+                      obscureText ? Icons.visibility_off : Icons.visibility,
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        obscureText = !obscureText;
+                      });
+                    },
+                  ),
                 ),
                 onSaved: (value) {
                   setState(() {
@@ -81,6 +92,12 @@ class _LoginPageState extends State<LoginPage> {
                   });
                 }
               ),
+              const SizedBox(height: 16.0),
+              if (errorMessage != null)
+                Text(
+                  errorMessage!,
+                  style: TextStyle(color: Colors.red),
+                ),
               const SizedBox(height: 20),
               ElevatedButton(
                 onPressed: () async {
@@ -94,7 +111,9 @@ class _LoginPageState extends State<LoginPage> {
                       print('Navigating to home'); // Debug print
                       _navigationService.pushReplacementNamed('/home');
                     } else {
-                      print('Login failed'); // Debug print
+                      setState(() {
+                        errorMessage = 'Incorrect email or password';
+                      });
                     }
                   }
                 },

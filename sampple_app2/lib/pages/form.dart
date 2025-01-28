@@ -1,8 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:sampple_app2/services/auth_service.dart';
 import 'package:sampple_app2/services/navigation_service.dart';
-import 'details.dart';
+import 'package:sampple_app2/pages/details.dart';
 
 class MyForm extends StatefulWidget {
   const MyForm({super.key});
@@ -59,14 +60,14 @@ class _MyFormState extends State<MyForm> {
             children: [
               MyTextField(
                   myController: _productController,
-                  fieldName: "Product Name",
+                  fieldName: "Item Name",
                   myIcon: Icons.account_balance,
                   prefixIconColor: Colors.deepPurple.shade300),
               const SizedBox(height: 10.0),
               //Use to add space between Textfields
               MyTextField(
                   myController: _productDesController,
-                  fieldName: "Product Description",
+                  fieldName: "Item Store",
                   prefixIconColor: Colors.deepPurple.shade300),
               const SizedBox(height: 20.0),
               myBtn(context),
@@ -82,18 +83,20 @@ class _MyFormState extends State<MyForm> {
     return OutlinedButton(
       style: OutlinedButton.styleFrom(minimumSize: const Size(200, 50)),
       onPressed: () {
+        CollectionReference colRef = FirebaseFirestore.instance.collection("shoppinglist");
+        colRef.add({
+          "productName": _productController.text,
+          "productDescription": _productDesController.text
+        });
         Navigator.push(
           context,
           MaterialPageRoute(builder: (context) {
-            return Details(
-              productName: _productController.text,
-              productDescription: _productDesController.text,
-            );
+            return DetailsScreen();
           }),
         );
       },
       child: Text(
-        "Submit Form".toUpperCase(),
+        "Add Item".toUpperCase(),
         style: const TextStyle(
             fontWeight: FontWeight.bold, color: Colors.deepPurple),
       ),

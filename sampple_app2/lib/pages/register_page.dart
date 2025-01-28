@@ -15,7 +15,7 @@ class _RegisterPageState extends State<RegisterPage> {
 
   final GlobalKey<FormState> _registerFormKey = GlobalKey();
   final RegExp _emailRegExp = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
-  final bool obscureText = true;
+  bool obscureText = true;
   String? name, email, password;
 
   late AuthService _authService;
@@ -81,11 +81,21 @@ class _RegisterPageState extends State<RegisterPage> {
                   if (value != null && value.length >= 6) {
                     return null;
                   }
-                  return 'Enter a valid password';
+                  return 'Password must be at least 6 characters';
                 },
-                decoration: const InputDecoration(
+                decoration: InputDecoration(
                   hintText: 'Password',
-                  border: OutlineInputBorder(),
+                  border: const OutlineInputBorder(),
+                  suffixIcon: IconButton(
+                    icon: Icon(
+                      obscureText ? Icons.visibility_off : Icons.visibility,
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        obscureText = !obscureText;
+                      });
+                    },
+                  ),
                 ),
                 onSaved: (value) {
                   setState(() {
