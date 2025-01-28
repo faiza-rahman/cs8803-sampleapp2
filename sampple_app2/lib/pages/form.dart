@@ -37,54 +37,42 @@ class _MyFormState extends State<MyForm> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-            backgroundColor: Colors.deepPurple.shade300,
-            title: const Text("Shopping List"),
-            centerTitle: true,
-            actions: [
-              IconButton(
-                onPressed: () async {
-                  bool result = await _authService.logOut();
-                  if (result) {
-                    _navigationService.pushReplacementNamed("/login");
-                  }
-                },
-                color: Colors.black,
-                icon: const Icon(Icons.logout),
-              ),
-          ],
-            ),
-        body: Container(
-          padding: const EdgeInsets.all(20.0),
-          child: ListView(
-            children: [
-              MyTextField(
-                  myController: _productController,
-                  fieldName: "Item Name",
-                  myIcon: Icons.account_balance,
-                  prefixIconColor: Colors.deepPurple.shade300),
-              const SizedBox(height: 10.0),
-              //Use to add space between Textfields
-              MyTextField(
-                  myController: _productDesController,
-                  fieldName: "Item Store",
-                  prefixIconColor: Colors.deepPurple.shade300),
-              const SizedBox(height: 20.0),
-              myBtn(context),
+      appBar: AppBar(
+        title: const Text('Add Item'),
+      ),
+      body: Container(
+            padding: const EdgeInsets.all(20.0),
+            child: ListView(
+              children: [
+                MyTextField(
+                    myController: _productController,
+                    fieldName: "Item Name",
+                    myIcon: Icons.account_balance,
+                    prefixIconColor: Colors.deepPurple.shade300),
+                const SizedBox(height: 10.0),
+                //Use to add space between Textfields
+                MyTextField(
+                    myController: _productDesController,
+                    fieldName: "Item Store",
+                    prefixIconColor: Colors.deepPurple.shade300),
+                const SizedBox(height: 20.0),
+                myBtn(context),
+                
+              ],
               
-            ],
-            
+            ),
           ),
-        ));
+    );
   }
 
   //Function that returns OutlinedButton Widget also it pass data to Details Screen
   OutlinedButton myBtn(BuildContext context) {
     return OutlinedButton(
       style: OutlinedButton.styleFrom(minimumSize: const Size(200, 50)),
-      onPressed: () {
+      onPressed: () async {
         CollectionReference colRef = FirebaseFirestore.instance.collection("shoppinglist");
-        colRef.add({
+        await colRef.add({
+          "userId": _authService.userId,
           "productName": _productController.text,
           "productDescription": _productDesController.text
         });

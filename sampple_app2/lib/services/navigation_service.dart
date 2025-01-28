@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sampple_app2/pages/form.dart';
+import 'package:sampple_app2/pages/homescreen.dart';
 import 'package:sampple_app2/pages/login_page.dart';
 import 'package:sampple_app2/pages/register_page.dart';
 
@@ -9,7 +10,7 @@ class NavigationService {
   final Map<String, Widget Function(BuildContext)> _routes = {
     "/login": (context) => const LoginPage(),
     "/register": (context) => const RegisterPage(),
-    "/home": (context) => const MyForm(),
+    "/home": (context) => const HomeScreen(),
   };
 
   GlobalKey<NavigatorState> get navigatorKey => _navigatorKey;

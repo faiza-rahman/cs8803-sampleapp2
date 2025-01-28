@@ -9,6 +9,10 @@ class AuthService {
     return _user;
   }
 
+  String? get userId {
+    return _user?.uid;
+  }
+
   AuthService() {
     _firebaseAuth.authStateChanges().listen(authStateChangesStreamListener);
   }
