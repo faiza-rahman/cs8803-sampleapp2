@@ -14,6 +14,7 @@ class MessagesScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Messages'),
+        automaticallyImplyLeading: false,
       ),
       body: StreamBuilder<QuerySnapshot>(
         stream: FirebaseFirestore.instance.collection('messages').snapshots(),
@@ -27,25 +28,34 @@ class MessagesScreen extends StatelessWidget {
             return data['to'] == authService.user?.email;
           }).toList();
 
-          return ListView.builder(
-            itemCount: messages.length,
-            itemBuilder: (context, index) {
-              final message = messages[index].data() as Map<String, dynamic>;
-              return ListTile(
-                shape: RoundedRectangleBorder(
-                  side: BorderSide(width: 1.0, color: Colors.grey.shade300),
-                ),
-                title: Text(message['text']),
-                subtitle: Text('From: ${message['from']}'),
-              );
-            },
-          );
+          return messages.isEmpty
+              ? const Center(
+                  child: Text(
+                    'You have no messages!',
+                    style: TextStyle(fontSize: 18.0, color: Colors.grey),
+                  ),
+                )
+              : ListView.builder(
+                  itemCount: messages.length,
+                  itemBuilder: (context, index) {
+                    final message = messages[index].data() as Map<String, dynamic>;
+                    return ListTile(
+                      shape: RoundedRectangleBorder(
+                        side: BorderSide(width: 1.0, color: Colors.grey.shade300),
+                      ),
+                      title: Text(message['text']),
+                      subtitle: Text('From: ${message['from']}'),
+                    );
+                  },
+                );
         },
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           _showNewMessageDialog(context, authService);
         },
+        backgroundColor: Colors.deepPurple.shade300, 
+        shape: const CircleBorder(), 
         child: const Icon(Icons.add),
       ),
     );

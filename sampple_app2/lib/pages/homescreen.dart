@@ -45,6 +45,7 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
         backgroundColor: Colors.deepPurple.shade300,
         title: const Text("EasyShop"),
+        automaticallyImplyLeading: false,
         centerTitle: true,
         actions: [
           IconButton(

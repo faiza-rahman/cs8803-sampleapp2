@@ -48,10 +48,19 @@ class _DetailsScreenState extends State<DetailsScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Shopping List'),
+        automaticallyImplyLeading: false,
       ),
       body: Container(
           padding: const EdgeInsets.all(4.0),
-          child: ListView.builder(
+          child: _shoppingListItems.isEmpty
+            ? const Center(
+                child: Text(
+                  'Your shopping list is empty!',
+                  style: TextStyle(fontSize: 18.0, color: Colors.grey),
+                ),
+              )
+            
+          : ListView.builder(
             itemCount: _shoppingListItems.length,
             itemBuilder: (context, index) {
               final item = _shoppingListItems[index];

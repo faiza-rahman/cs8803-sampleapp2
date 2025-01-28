@@ -39,6 +39,7 @@ class _MyFormState extends State<MyForm> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Add Item'),
+        automaticallyImplyLeading: false,
       ),
       body: Container(
             padding: const EdgeInsets.all(20.0),
