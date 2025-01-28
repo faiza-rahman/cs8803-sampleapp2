@@ -5,7 +5,7 @@ import 'package:sampple_app2/services/navigation_service.dart';
 import 'details.dart';
 
 class MyForm extends StatefulWidget {
-  const MyForm({Key? key}) : super(key: key);
+  const MyForm({super.key});
 
   @override
   State<MyForm> createState() => _MyFormState();
@@ -105,7 +105,7 @@ class _MyFormState extends State<MyForm> {
 // You can learn it in Tutorial (2.13) Custom Widget in Flutter
 class MyTextField extends StatelessWidget {
   MyTextField({
-    Key? key,
+    super.key,
     required this.fieldName,
     required this.myController,
     this.myIcon = Icons.verified_user_outlined,

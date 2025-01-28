@@ -3,20 +3,20 @@ import 'package:get_it/get_it.dart';
 import 'package:sampple_app2/services/auth_service.dart';
 import 'package:sampple_app2/services/navigation_service.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+class RegisterPage extends StatefulWidget {
+  const RegisterPage({super.key});
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<RegisterPage> createState() => _RegisterPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _RegisterPageState extends State<RegisterPage> {
   final GetIt _getIt = GetIt.instance;
 
-  final GlobalKey<FormState> _loginFormKey = GlobalKey();
+  final GlobalKey<FormState> _registerFormKey = GlobalKey();
   final RegExp _emailRegExp = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
   final bool obscureText = true;
-  String? email, password;
+  String? name, email, password;
 
   late AuthService _authService;
   late NavigationService _navigationService;
@@ -40,11 +40,23 @@ class _LoginPageState extends State<LoginPage> {
       child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Form(
-          key: _loginFormKey,
+          key: _registerFormKey,
           child: Column(
             children: [
-              const Text('Login', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+              const Text('Sign Up', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
               const SizedBox(height: 20),
+              TextFormField(
+                decoration: const InputDecoration(
+                  hintText: 'Name',
+                  border: OutlineInputBorder(),
+                ),
+                onSaved: (value) {
+                  setState(() {
+                    name = value;
+                  });
+                }
+              ),
+              const SizedBox(height: 10),
               TextFormField(
                 validator: (value) {
                   if (value != null && _emailRegExp.hasMatch(value)) {
@@ -84,39 +96,39 @@ class _LoginPageState extends State<LoginPage> {
               const SizedBox(height: 20),
               ElevatedButton(
                 onPressed: () async {
-                  if (_loginFormKey.currentState?.validate() ?? false) {
-                    _loginFormKey.currentState?.save();
+                  if (_registerFormKey.currentState?.validate() ?? false) {
+                    _registerFormKey.currentState?.save();
                     print('Email: $email, Password: $password'); // Debug print
-                    bool result = await _authService.login(email!, password!);
-                    print('Login result: $result'); // Debug print
+                    bool result = await _authService.signup(email!, password!);
+                    print('signup result: $result'); // Debug print
 
                     if (result) {
                       print('Navigating to home'); // Debug print
                       _navigationService.pushReplacementNamed('/home');
                     } else {
-                      print('Login failed'); // Debug print
+                      print('signup failed'); // Debug print
                     }
                   }
                 },
-                child: const Text('Login'),
+                child: const Text('Sign Up'),
               ),
-              _createAnAccountLink(),
+              _goBackToLogin(),
             ],
           ),
         ),
       ),
     );
   }
-  Widget _createAnAccountLink() {
+  Widget _goBackToLogin() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        const Text('Don\'t have an account?'),
+        const Text('Already have an account?'),
         TextButton(
           onPressed: () {
-            _navigationService.pushNamed('/register');
+            _navigationService.pushNamed('/login');
           },
-          child: const Text('Sign Up'),
+          child: const Text('Login'),
         ),
       ],
     );
