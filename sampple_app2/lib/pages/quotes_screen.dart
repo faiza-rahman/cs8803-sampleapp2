@@ -21,7 +21,7 @@ class _QuotesScreenState extends State<QuotesScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text(""),
+          automaticallyImplyLeading: false,
         ),
 
         /// data show in body
