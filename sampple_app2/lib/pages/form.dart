@@ -41,7 +41,7 @@ class _MyFormState extends State<MyForm> {
         automaticallyImplyLeading: false,
       ),
       body: Container(
-            padding: const EdgeInsets.only(bottom: 20.0, right: 20.0, left: 20.0),
+            padding: const EdgeInsets.all(20.0),
             child: ListView(
               children: [
                 MyTextField(

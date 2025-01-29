@@ -64,7 +64,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
             itemBuilder: (context, index) {
               final item = _shoppingListItems[index];
               return Card(
-                elevation: 4.0, 
+
                 shape: RoundedRectangleBorder(
                 side: BorderSide(width: 1.0, color: Colors.grey.shade300),
                 borderRadius: BorderRadius.circular(8.0),
