@@ -91,7 +91,7 @@ class _MyFormState extends State<MyForm> {
         );
       },
       child: Text(
-        "Add Item".toUpperCase(),
+        "Add to shopping cart".toUpperCase(),
         style: TextStyle(
             fontWeight: FontWeight.bold, color: Colors.white),
       ),
