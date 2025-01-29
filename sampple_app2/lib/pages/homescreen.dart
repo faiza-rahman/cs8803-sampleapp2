@@ -26,6 +26,12 @@ class _HomeScreenState extends State<HomeScreen> {
     MessagesScreen(),
   ];
 
+  static const List<String> _titles = <String>[
+    'Shopping List',
+    'Add Item',
+    'Messages',
+  ];
+
   @override
   void initState() {
     super.initState();
@@ -44,7 +50,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.deepPurple.shade300,
-        title: const Text("EasyShop"),
+        title: Text(_titles[_selectedIndex], style: const TextStyle(color: Colors.white)),
         automaticallyImplyLeading: false,
         centerTitle: true,
         actions: [
@@ -55,7 +61,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 _navigationService.pushReplacementNamed("/login");
               }
             },
-            color: Colors.black,
+            color: Colors.white,
             icon: const Icon(Icons.logout),
           ),
         ],
@@ -65,20 +71,23 @@ class _HomeScreenState extends State<HomeScreen> {
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
-            label: 'Home',
+            label: '', // Empty label
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.add),
-            label: 'Add',
+            label: '', // Empty label
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.message),
-            label: 'Messages',
+            label: '', // Empty label
           ),
         ],
         currentIndex: _selectedIndex,
-        selectedItemColor: Colors.deepPurple,
+        selectedItemColor: Colors.deepPurple.shade300,
         onTap: _onItemTapped,
+        showSelectedLabels: false, 
+        showUnselectedLabels: false, 
+        iconSize: 30.0,
       ),
     );
   }

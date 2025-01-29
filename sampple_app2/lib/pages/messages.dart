@@ -13,7 +13,6 @@ class MessagesScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Messages'),
         automaticallyImplyLeading: false,
       ),
       body: StreamBuilder<QuerySnapshot>(
@@ -56,7 +55,7 @@ class MessagesScreen extends StatelessWidget {
         },
         backgroundColor: Colors.deepPurple.shade300, 
         shape: const CircleBorder(), 
-        child: const Icon(Icons.add),
+        child: const Icon(Icons.edit, color: Colors.white),
       ),
     );
   }

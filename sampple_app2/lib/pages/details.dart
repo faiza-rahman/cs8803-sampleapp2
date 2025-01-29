@@ -40,14 +40,13 @@ class _DetailsScreenState extends State<DetailsScreen> {
 
   Future<void> _deleteShoppingListItem(String id) async {
     await FirebaseFirestore.instance.collection('shoppinglist').doc(id).delete();
-    _fetchShoppingListItems(); // Refresh the list after deletion
+    _fetchShoppingListItems(); 
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Shopping List'),
         automaticallyImplyLeading: false,
       ),
       body: Container(
@@ -65,7 +64,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
             itemBuilder: (context, index) {
               final item = _shoppingListItems[index];
               return Card(
-                elevation: 4.0, // Add elevation to the Card
+                elevation: 4.0, 
                 shape: RoundedRectangleBorder(
                 side: BorderSide(width: 1.0, color: Colors.grey.shade300),
                 borderRadius: BorderRadius.circular(8.0),

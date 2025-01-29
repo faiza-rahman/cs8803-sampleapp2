@@ -38,38 +38,38 @@ class _MyFormState extends State<MyForm> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Add Item'),
         automaticallyImplyLeading: false,
       ),
       body: Container(
-            padding: const EdgeInsets.all(20.0),
+            padding: const EdgeInsets.only(bottom: 20.0, right: 20.0, left: 20.0),
             child: ListView(
               children: [
                 MyTextField(
                     myController: _productController,
                     fieldName: "Item Name",
-                    myIcon: Icons.account_balance,
+                    myIcon: Icons.restaurant,
                     prefixIconColor: Colors.deepPurple.shade300),
-                const SizedBox(height: 10.0),
+                const SizedBox(height: 20.0),
                 //Use to add space between Textfields
                 MyTextField(
                     myController: _productDesController,
                     fieldName: "Item Store",
+                    myIcon: Icons.store,
                     prefixIconColor: Colors.deepPurple.shade300),
-                const SizedBox(height: 20.0),
+                const SizedBox(height: 40.0),
                 myBtn(context),
-                
+               
               ],
               
             ),
           ),
     );
   }
-
+  
   //Function that returns OutlinedButton Widget also it pass data to Details Screen
   OutlinedButton myBtn(BuildContext context) {
     return OutlinedButton(
-      style: OutlinedButton.styleFrom(minimumSize: const Size(200, 50)),
+      style: OutlinedButton.styleFrom(minimumSize: const Size(200, 50), backgroundColor: Colors.deepPurple.shade300,),
       onPressed: () async {
         CollectionReference colRef = FirebaseFirestore.instance.collection("shoppinglist");
         await colRef.add({
@@ -93,7 +93,7 @@ class _MyFormState extends State<MyForm> {
       child: Text(
         "Add Item".toUpperCase(),
         style: TextStyle(
-            fontWeight: FontWeight.bold, color: Colors.deepPurple),
+            fontWeight: FontWeight.bold, color: Colors.white),
       ),
     );
   }
